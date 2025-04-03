@@ -1,8 +1,8 @@
 import streamlit as st
 import openai
 
-# Configuración de la API Key de OpenAI (reemplazar con tu clave)
-openai.api_key = "TU_API_KEY"
+# Cargar la API Key de forma segura desde Streamlit Secrets
+openai.api_key = st.secrets["openai"]["api_key"]
 
 # Función para generar el plan de alimentación
 def generar_plan_alimentacion(edad, peso, altura, actividad, objetivo):
@@ -44,3 +44,4 @@ st.write("4. La IA generará un plan de comidas personalizado basado en su infor
 
 # Footer
 st.write("NutriAI utiliza inteligencia artificial para proporcionar recomendaciones generales. Consulte a un profesional para asesoramiento personalizado.")
+
