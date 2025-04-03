@@ -1,22 +1,23 @@
-import streamlit as st
 import openai
+import streamlit as st
 
-# Cargar la API Key de forma segura desde Streamlit Secrets
-openai.api_key = st.secrets["openai"]["api_key"]
+# Crear el cliente de OpenAI correctamente
+client = openai.OpenAI(api_key=st.secrets["openai"]["api_key"])
 
-# Función para generar el plan de alimentación
 def generar_plan_alimentacion(edad, peso, altura, actividad, objetivo):
     prompt = (f"Genera un plan de alimentación semanal para una persona de {edad} años, {peso} kg, "
               f"{altura} m de altura, que hace ejercicio {actividad} veces por semana y quiere {objetivo}. "
               "Incluye desayuno, almuerzo, merienda y cena con opciones variadas.")
-    
-    respuesta = openai.ChatCompletion.create(
-    model="gpt-4",
-    messages=[{"role": "system", "content": "Eres un experto en nutrición."},
-              {"role": "user", "content": prompt}]
-)
-    
-    return respuesta["choices"][0]["message"]["content"]
+
+    respuesta = client.chat.completions.create(
+        model="gpt-4",
+        messages=[
+            {"role": "system", "content": "Eres un experto en nutrición."},
+            {"role": "user", "content": prompt}
+        ]
+    )
+
+    return respuesta.choices[0].message.content
 
 # Interfaz de Streamlit
 st.title("NutriAI - Planificación de Alimentación Personalizada")
