@@ -11,10 +11,10 @@ def generar_plan_alimentacion(edad, peso, altura, actividad, objetivo):
               "Incluye desayuno, almuerzo, merienda y cena con opciones variadas.")
     
     respuesta = openai.ChatCompletion.create(
-        model="gpt-4",
-        messages=[{"role": "system", "content": "Eres un experto en nutrición."},
-                  {"role": "user", "content": prompt}]
-    )
+            model="gpt-4",
+            messages=[{"role": "system", "content": "Eres un experto en nutrición."},
+              {"role": "user", "content": prompt}]
+)
     
     return respuesta["choices"][0]["message"]["content"]
 
