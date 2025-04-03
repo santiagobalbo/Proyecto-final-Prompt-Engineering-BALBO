@@ -10,7 +10,7 @@ def generar_plan_alimentacion(edad, peso, altura, actividad, objetivo):
               "Incluye desayuno, almuerzo, merienda y cena con opciones variadas.")
 
     respuesta = client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": "Eres un experto en nutrición."},
             {"role": "user", "content": prompt}
